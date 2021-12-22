@@ -1,0 +1,159 @@
+﻿@model Coin
+@{
+    ViewData["Title"] = "Home Page";
+    var model = Model;
+}
+
+<div class="row">
+    <div class="col-md-8 p-0">
+            @await Html.PartialAsync("_ChartPartial")
+        
+            @await Html.PartialAsync("_OrderSectionPartial")
+        
+    </div>
+
+    <div class="col-md-4" style="padding-left:1.4rem;padding-top: 1.3rem;" id="col-order">
+        <div class="row">
+            
+            @await Html.PartialAsync("_OrdersPartial")
+
+            @await Html.PartialAsync("_TradePartial")
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+    var priceElement = document.getElementById("price");
+    var volume24hourElement = document.getElementById("volume24hour");
+    var change24HourElement = document.getElementById("change24hour");
+    var tablePriceElement = document.getElementById("tableprice");
+    var tradeTable = document.getElementById("tradetable");
+    var orderTable = document.getElementById("ordertable");
+    var orderBuyTable = document.getElementById("orderbuytable");
+    var currencyOneElement = document.getElementById("currency1");
+    var highPriceIn24HourElement = document.getElementById("high24hour");
+    var lowPriceIn24HourElement = document.getElementById("low24hour");
+    change24HourElement.firstChild.textContent = @Model.Change24Hour;
+    volume24hourElement.innerText = @Model.Volume24Hour;
+    highPriceIn24HourElement.innerText = @Model.High24Hour;
+    lowPriceIn24HourElement.innerText = @Model.Low24Hour;
+
+    var apiKey = "f2713fb5751cd477e5510980fa365f32f152b5eaa36b69032ebd3ba473fe46a8";
+    function createWebSocket(currency) {
+        var ccStreamer = new WebSocket('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey);
+        ccStreamer.onopen = function onStreamOpen() {
+            var subRequest = {
+                "action": "SubAdd",
+                "subs": [`0~BTCTurk~${currency.trim()}~TRY`, `2~BTCTurk~${currency.trim()}~TRY`, "2~Coinbase~BTC~USD", "8~Binance~BTC~USDT"]
+            };
+            ccStreamer.send(JSON.stringify(subRequest));
+        }
+        ccStreamer.onmessage = function onStreamMessage(message) {
+            var jsonMessage = JSON.parse(event.data);
+            var price = jsonMessage.PRICE;
+            var volume24hour = jsonMessage.VOLUME24HOUR;
+            var change24Hour = jsonMessage.CHANGE24HOUR;
+            if (jsonMessage.TOSYMBOL == "USD") {
+                if (typeof (price) === "number") {
+                    var currencyTwoElement = document.getElementById("currency2");
+                    currencyTwoElement.innerText = price;
+                }
+            }
+            else if (jsonMessage.TSYM == "USDT") {
+                var newPrice = jsonMessage.P;
+                var quantity = jsonMessage.Q;
+                var time = new Date().toLocaleTimeString("en-GB");
+                var sum = 0;
+                if (typeof (newPrice) === "number" && quantity > 0) {
+                    if (localStorage.getItem("firstQuantity") == null) {
+                        localStorage.setItem("firstQuantity", quantity);
+                        sum = quantity;
+                    }
+                    else {
+                        sum = quantity + localStorage.getItem("firstQuantity");
+                    }
+                    (jsonMessage.SIDE == 0 ? orderTable : orderBuyTable).innerHTML = `<tr><td>${newPrice}</td><td>${quantity}</td><td>${sum}</td></tr>` + orderTable.innerHTML;
+                }
+            }
+
+            else {
+                if (typeof (price) === "number") {
+                    priceElement.innerText = price;
+                }
+
+                if (typeof (volume24hour) === "number") {
+                    volume24hourElement.innerText = volume24hour;
+                }
+                if (typeof (change24Hour) === "number") {
+                    change24HourElement.firstChild.innerText = change24Hour;
+                }
+
+                var newPrice = jsonMessage.P;
+                var quantity = jsonMessage.Q;
+                var time = new Date().toLocaleTimeString("en-GB");
+                if (typeof (newPrice) === "number" && quantity > 0) {
+
+                    tradeTable.innerHTML = `<tr><td>${time}</td><td>${quantity}</td><td>${newPrice}</td></tr>` + tradeTable.innerHTML;
+                    currencyOneElement.innerText = newPrice;
+                }
+            }
+        }
+    }
+    var currency = "BTC";
+    createChart(currency);
+    var selectElement = document.getElementById("mySelect");
+    selectElement.onchange = () => {
+        var currency = selectElement.options[selectElement.selectedIndex].getAttribute('data-content').split("/>")[1].split("/")[0];
+        createChart(currency);
+    };
+
+    function createChart(currency) {
+        createWebSocket(currency);
+        new TradingView.widget(
+            {
+                "container_id": "technical-analysis",
+                "autosize": true,
+                "symbol": `BINANCE:${currency.trim()}TRY`,
+                "interval": "D",
+                "timezone": "exchange",
+                "theme": "light",
+                "style": "1",
+                "toolbar_bg": "#f1f3f6",
+                "withdateranges": true,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "save_image": true,
+                "show_popup_button": true,
+                "popup_width": "1000",
+                "popup_height": "650",
+                "range": "all",
+                "locale": "tr"
+            }
+        );
+    }
+
+    var seconds = 0;
+    function incrementSeconds() {
+        seconds += 1;
+        if (seconds == 20) {
+            orderTable.innerHTML = "";
+            orderBuyTable.innerHTML = "";
+            seconds = 0;
+        }
+    }
+
+    var cancel = setInterval(incrementSeconds, 1000);
+
+</script>
+
+
+
+
+
+
+
+
+}

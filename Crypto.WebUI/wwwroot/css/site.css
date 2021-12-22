@@ -1,0 +1,107 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+/* custom css */
+#navbarSupportedContent {
+    margin-left: 3rem;
+}
+
+    #navbarSupportedContent span {
+        margin-right: 0.5rem;
+        font-size: 14px;
+    }
+
+        #navbarSupportedContent span .grey {
+            font-size: 11px;
+            color: grey;
+        }
+
+    #navbarSupportedContent strong {
+        font-weight: 600;
+    }
+
+#navbarDropdown {
+    margin-right: 10px;
+}
+
+.d-flex a {
+    padding: 5px 25px;
+    font-weight: 600;
+}
+
+
+
+#buttons {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.col-md-5 span {
+    padding: 5px;
+}
+
+svg {
+    fill: #999 !important;
+}
+
+th {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.input-group {
+    width: 90%;
+}
+
+#inputs {
+    text-align: center;
+    margin-left: 1rem;
+}
+
+/* Bootstrap select */
+#mySelect {
+    width: 140px !important;
+}
+
+    #mySelect option {
+        width: 130px !important;
+    }
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 140px;
+    margin-right: 5px;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+    font-weight: 500;
+    color: #494949;
+}
+
+/* Bootstrap select end */
+
+
+@media (min-width: 1200px) {
+    #technical-analysis {
+        width: 1280px;
+        height:610px;
+    }
+
+}

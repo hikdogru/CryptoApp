@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Crypto.WebUI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #f5f5f5 !important;">
+            <div class="container-fluid" style="height:2rem;">
+                <a href="/" class="header-logo mr-4 mb-1 router-link-active">
+                    <svg viewBox="0 0 82 19"
+                         xmlns="http://www.w3.org/2000/svg" width="89" height="21">
+                        <g fill-rule="evenodd">
+                            <path d="M6.929 18.167c-1.987 0-3.638-.653-4.954-1.958C.658 14.904 0 13.311 0 11.43v-.05C0 9.5.663 7.9 1.987 6.576c1.325-1.319 2.988-1.98 4.992-1.98 1.854 0 3.369.487 4.544 1.458.398.31.596.731.596 1.264 0 .456-.165.843-.496 1.17a1.673 1.673 0 0 1-1.217.486c-.414 0-.778-.124-1.093-.365-.728-.551-1.515-.827-2.36-.827-.926 0-1.696.349-2.309 1.046-.612.695-.919 1.53-.919 2.505v.047c0 1.021.31 1.878.932 2.567.62.69 1.436 1.034 2.446 1.034.877 0 1.705-.302 2.483-.902a1.72 1.72 0 0 1 1.018-.34c.447 0 .824.156 1.13.464.307.306.46.68.46 1.119 0 .451-.182.843-.546 1.167-1.259 1.119-2.832 1.678-4.719 1.678M21.035 14.98c1.043 0 1.88-.34 2.508-1.021s.944-1.524.944-2.53v-.048c0-.99-.327-1.837-.98-2.542s-1.495-1.058-2.522-1.058c-1.043 0-1.879.34-2.508 1.022-.63.68-.944 1.524-.944 2.53v.048c0 .989.327 1.836.981 2.541.654.705 1.494 1.058 2.521 1.058m5.103 1.216c-1.382 1.313-3.1 1.97-5.153 1.97s-3.762-.653-5.128-1.958-2.049-2.898-2.049-4.779v-.048c0-1.897.691-3.503 2.074-4.816s3.1-1.97 5.153-1.97c2.053 0 3.762.653 5.128 1.958s2.05 2.898 2.05 4.779v.049c0 1.897-.692 3.502-2.075 4.815M31.117 16.172v-9.63c0-.52.186-.957.559-1.314.372-.357.815-.535 1.328-.535s.956.178 1.329.535c.372.357.559.794.559 1.313v9.631c0 .519-.187.959-.559 1.313-.373.357-.815.535-1.329.535s-.956-.178-1.328-.535a1.744 1.744 0 0 1-.559-1.313m-.224-14.397v-.049c0-.518.2-.936.597-1.252.397-.316.902-.472 1.514-.472.613 0 1.118.156 1.515.472.398.316.596.734.596 1.252v.049c0 .519-.198.94-.596 1.267-.397.324-.902.484-1.515.484-.612 0-1.117-.16-1.514-.484a1.562 1.562 0 0 1-.597-1.267M38.443 16.172v-9.63c0-.52.182-.957.546-1.314.365-.357.812-.535 1.341-.535s.977.178 1.342.535c.364.357.546.794.546 1.313v.146c1.11-1.394 2.409-2.091 3.899-2.091 1.424 0 2.533.43 3.328 1.289.794.861 1.192 2.043 1.192 3.55v6.737c0 .519-.187.959-.56 1.313-.372.357-.814.535-1.328.535s-.956-.178-1.328-.535a1.744 1.744 0 0 1-.559-1.313v-5.57c0-.859-.199-1.515-.596-1.97-.397-.451-.96-.68-1.689-.68s-1.304.229-1.726.68c-.422.455-.633 1.111-.633 1.97v5.57c0 .519-.182.959-.546 1.313-.365.357-.812.535-1.341.535s-.977-.178-1.342-.535a1.764 1.764 0 0 1-.546-1.313"
+                                  fill="#05f"></path>
+                            <path d="M55.156 17.874c-.53 0-.969-.136-1.316-.413a1.302 1.302 0 0 1-.522-1.069v-.075c0-.597.282-1.197.845-1.797l6.183-6.69h-5.265c-.43 0-.794-.144-1.092-.438a1.405 1.405 0 0 1-.447-1.044c0-.423.153-.778.46-1.072.305-.29.666-.438 1.08-.438h8.27c.53 0 .968.14 1.315.414.348.276.522.632.522 1.07v.073c0 .6-.281 1.202-.844 1.802l-6.209 6.686h5.513c.43 0 .795.152 1.093.45.298.302.447.652.447 1.06 0 .405-.15.753-.447 1.043a1.494 1.494 0 0 1-1.093.438h-8.493zM74.105 14.98c1.043 0 1.88-.34 2.508-1.021.63-.681.944-1.524.944-2.53v-.048c0-.99-.327-1.837-.98-2.542s-1.495-1.058-2.522-1.058c-1.043 0-1.879.34-2.508 1.022-.63.68-.944 1.524-.944 2.53v.048c0 .989.327 1.836.981 2.541.654.705 1.494 1.058 2.521 1.058m5.103 1.216c-1.382 1.313-3.1 1.97-5.153 1.97s-3.762-.653-5.128-1.958-2.049-2.898-2.049-4.779v-.048c0-1.897.691-3.503 2.074-4.816s3.1-1.97 5.153-1.97c2.053 0 3.762.653 5.128 1.958s2.05 2.898 2.05 4.779v.049c0 1.897-.692 3.502-2.075 4.815"
+                                  fill="#05f"></path>
+                        </g>
+                    </svg>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+
+
+                            <select id="mySelect" data-show-content="true">
+                              
+                                    <option data-content="<img src='https://www.cryptocompare.com/media/37746251/btc.png' style=width='18' height='18' /> BTC / TRY">
+                                    </option>
+
+                                    <option data-content="<img src='https://www.cryptocompare.com/media/37746238/eth.png'  style=width='18' height='18'/> ETH / TRY ">
+                                    </option>
+
+                                    <option data-content="<img src='https://www.cryptocompare.com//media/37747199/shib.png'  style=width='18' height='18'/> SHIB / TRY ">
+                                    </option>
+                               
+                            </select>
+
+                        </li>
+
+
+                        <span>
+                            <strong id="price">506,168</strong>
+                            <span class="caption">TRY</span><br> <span class="grey">Son Fiyat</span>
+                        </span>
+                        <span>
+                            <strong style="color:#01aa78" id="change24hour">
+                                0
+                                <span class="caption"> TRY (0%)</span>
+                            </strong><br> <span class="grey">24s. Değişim</span>
+                        </span>
+
+                        <span>
+                            <strong id="high24hour">506,168</strong>
+                            <span class="caption">TRY</span><br> <span class="grey">24s. En Yüksek</span>
+                        </span>
+                        <span>
+                            <strong id="low24hour">506,168</strong>
+                            <span class="caption">TRY</span><br> <span class="grey">24s. En Düşük</span>
+                        </span>
+
+                        <span>
+                            <strong id="volume24hour">0.02</strong>
+                            <span class="caption">BTC</span><br> <span class="grey">24s. Hacim</span>
+                        </span>
+                    </ul>
+                    <div class="d-flex">
+                        <a class="btn btn-default btn-sm">
+                            <i aria-hidden="true" class="icon mr-1 material-icons" style="font-size: 16px;">subdirectory_arrow_left</i> BASİT MOD
+                        </a>
+                        <a class="btn btn-default btn-sm">KAYIT OL</a>
+                        <a class="btn btn-primary btn-sm">GİRİŞ YAP</a>
+
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <strong>TR</strong>
+
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">EN</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <script>
+        $('#mySelect').selectpicker();
+    </script>
+</body>
+</html>
