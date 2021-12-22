@@ -29,23 +29,6 @@ namespace Crypto.WebUI.Controllers
             return View(model: info);
         }
 
-        [HttpPost]
-        public IActionResult GetJson(string data = "")
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-            if (data.Contains("STREAMERWELCOME") == false)
-            {
-                var coin = System.Text.Json.JsonSerializer.Deserialize<Coin>(data, options);
-                return View("Index", model: coin);
-
-            }
-
-            return View("Index");
-        }
-
         public IActionResult Privacy()
         {
             return View();

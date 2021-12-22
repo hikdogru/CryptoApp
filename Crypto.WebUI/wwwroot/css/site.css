@@ -1,7 +1,3 @@
-html {
-    font-size: 14px;
-}
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -11,6 +7,7 @@ html {
 html {
     position: relative;
     min-height: 100%;
+    font-size: 14px;
 }
 
 body {
@@ -100,7 +97,6 @@ th {
 
 @media (min-width: 1200px) {
     #technical-analysis {
-        width: 1280px;
         height:610px;
     }
 

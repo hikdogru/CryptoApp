@@ -47,7 +47,8 @@
         ccStreamer.onopen = function onStreamOpen() {
             var subRequest = {
                 "action": "SubAdd",
-                "subs": [`0~BTCTurk~${currency.trim()}~TRY`, `2~BTCTurk~${currency.trim()}~TRY`, "2~Coinbase~BTC~USD", "8~Binance~BTC~USDT"]
+                "subs": [`0~BTCTurk~${currency.trim()}~TRY`, `2~BTCTurk~${currency.trim()}~TRY`,
+                "2~Coinbase~BTC~USD", "8~Binance~BTC~USDT"]
             };
             ccStreamer.send(JSON.stringify(subRequest));
         }
@@ -75,7 +76,8 @@
                     else {
                         sum = quantity + localStorage.getItem("firstQuantity");
                     }
-                    (jsonMessage.SIDE == 0 ? orderTable : orderBuyTable).innerHTML = `<tr><td>${newPrice}</td><td>${quantity}</td><td>${sum}</td></tr>` + orderTable.innerHTML;
+                    (jsonMessage.SIDE == 0 ? orderTable : orderBuyTable)
+                    .innerHTML = `<tr><td>${newPrice}</td><td>${quantity}</td><td>${sum}</td></tr>` + orderTable.innerHTML;
                 }
             }
 
@@ -83,33 +85,35 @@
                 if (typeof (price) === "number") {
                     priceElement.innerText = price;
                 }
-
                 if (typeof (volume24hour) === "number") {
                     volume24hourElement.innerText = volume24hour;
                 }
                 if (typeof (change24Hour) === "number") {
                     change24HourElement.firstChild.innerText = change24Hour;
                 }
-
                 var newPrice = jsonMessage.P;
                 var quantity = jsonMessage.Q;
                 var time = new Date().toLocaleTimeString("en-GB");
                 if (typeof (newPrice) === "number" && quantity > 0) {
 
-                    tradeTable.innerHTML = `<tr><td>${time}</td><td>${quantity}</td><td>${newPrice}</td></tr>` + tradeTable.innerHTML;
+                    tradeTable.innerHTML = `<tr><td>${time}</td><td>${quantity}</td><td>${newPrice}</td></tr>`
+                    + tradeTable.innerHTML;
                     currencyOneElement.innerText = newPrice;
                 }
             }
         }
     }
-    var currency = "BTC";
-    createChart(currency);
+    
     var selectElement = document.getElementById("mySelect");
     selectElement.onchange = () => {
-        var currency = selectElement.options[selectElement.selectedIndex].getAttribute('data-content').split("/>")[1].split("/")[0];
+        var currency = selectElement.options[selectElement.selectedIndex].getAttribute('data-content')
+        .split("/>")[1].split("/")[0];
         createChart(currency);
     };
 
+
+    var currency = "BTC";
+    createChart(currency);
     function createChart(currency) {
         createWebSocket(currency);
         new TradingView.widget(
@@ -148,12 +152,4 @@
     var cancel = setInterval(incrementSeconds, 1000);
 
 </script>
-
-
-
-
-
-
-
-
 }
